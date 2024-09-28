@@ -1,0 +1,32 @@
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .tooltip-icon {
+    font-size: 18px;
+    color: blue;
+    border-bottom: 1px dotted blue;
+  }
+  
+  .tooltip-text {
+    visibility: visible;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    width: 300px;
+    top: 25px;
+    left: -50px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+  }
+  
