@@ -27,7 +27,6 @@
   padding: 10px 0;
   position: relative;
   bottom: 0;
-  width: 100%;
 }
 
 .cipher-container {
@@ -40,16 +39,31 @@
   gap: 2%;
 }
 
-.info-cipher{
-  width: 50%;
-}
-
-.info-container {
+.RSAcipher-container {
   margin: 20px;
-  padding: 0 20px;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  gap: 2%;
 }
+
+.form-cipher {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  padding: 2%;
+}
+
+.division{
+  display: flex;
+  flex-direction: column;
+}
+
+.info-cipher{
+  width: 40%;
+}
+
 
 input {
   margin: 5px;
@@ -119,7 +133,6 @@ button:hover {
   }
 
   .cipher-container {
-    width: 85%;
     padding: 2%;
     display: block;
     gap: 3%;
@@ -128,6 +141,11 @@ button:hover {
   .info-cipher{
     margin-left: 3%;
     width: 90%;
+  }
+
+  .form-cipher {
+    display: flex;
+    flex-direction: column;
   }
 
   input {
@@ -142,6 +160,15 @@ button:hover {
     display: flex;
     flex-direction: column;
   }
+
+  .keys{
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
 }
 
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function AESCipher() {
@@ -79,12 +79,6 @@ function AESCipher() {
                     <li>Cifrado de datos en tránsito.</li>
                     <li>Protección de información sensible en aplicaciones móviles y web.</li>
                 </ul>
-                <h3>Ejemplo:</h3>
-                <ul>
-                    <li>Mensaje original: "HOLA"</li>
-                    <li>Clave AES: "1234567890123456" (128 bits)</li>
-                    <li>Cifrado: "2a6d69de88bfa34a4c5930b2f3f2a0d7"</li>
-                </ul>
             </div>
 
             <div className='info-cipher'>
@@ -127,7 +121,6 @@ function AESCipher() {
                     </div>
                 )}
             </div>
-            <ToastContainer />
         </div>
     );
 }
