@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import ErrorHandling from './ErrorHandling';
+import Tooltip from './Tooltip';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CaesarCipher() {
     const [message, setMessage] = useState('');
     const [shift, setShift] = useState(0);
     const [result, setResult] = useState('');
-    const [error, setError] = useState('');
+
+    const cifrado = "Cifrado César"
+    const text = 'Ingresa el mensaje y el desplazamiento (número de posiciones para cambiar cada letra). Luego, haz clic en "Cifrar" o "Descifrar" para convertir tu mensaje.'
 
     const handleEncrypt = () => {
-        if (!message || shift === 0) {
-            setError('Por favor, ingrese un mensaje válido y un desplazamiento mayor a 0.');
+        if (!message) {
+            toast.error('Por favor, ingrese un mensaje válido.');
             return;
         }
-        setError('');
+        if (shift === 0) {
+            toast.error('Por favor, ingrese un desplazamiento mayor a 0.');
+            return;
+        }
 
         const encrypted = message
             .split('')
@@ -22,17 +29,32 @@ function CaesarCipher() {
     };
 
     const handleDecrypt = () => {
-        if (!message || shift === 0) {
-            setError('Por favor, ingrese un mensaje válido y un desplazamiento mayor a 0.');
+        if (!message) {
+            toast.error('Por favor, ingrese un mensaje válido.');
             return;
         }
-        setError('');
+        if (shift === 0) {
+            toast.error('Por favor, ingrese un desplazamiento mayor a 0.');
+            return;
+        }
 
         const decrypted = message
             .split('')
             .map(char => String.fromCharCode((char.charCodeAt(0) - parseInt(shift) - 65 + 26) % 26 + 65))
             .join('');
         setResult(decrypted);
+    };
+
+    const handleCopy = () => {
+        if (result) {
+            navigator.clipboard.writeText(result)
+                .then(() => {
+                    toast.success('¡Copiado al portapapeles!');
+                })
+                .catch((err) => {
+                    toast.error('Error al copiar, por favor inténtalo de nuevo.');
+                });
+        }
     };
 
     return (
@@ -54,11 +76,12 @@ function CaesarCipher() {
                     <li>Desplazamiento: 3</li>
                     <li>Mensaje cifrado: "KROD"</li>
                 </ul>
-
+                <p>
+                    Para saber cómo funciona utilizar este cifrado, pulsa el <Tooltip title={cifrado} message={text}/>.
+                </p>
             </div>
             <div className='info-cipher'>
                 <h2>Try it Out!</h2>
-                <ErrorHandling error={error} />
                 <div className="grid-container">
                     <label>
                         Mensaje:
@@ -85,7 +108,13 @@ function CaesarCipher() {
                     <button onClick={handleDecrypt}>Descifrar</button>
                 </div>
                 <p>Resultado: {result}</p>
+                {result && (
+                    <div>
+                        <button onClick={handleCopy}>Copiar al portapapeles</button>
+                    </div>
+                )}
             </div>
+            <ToastContainer />
         </div>
     );
 }

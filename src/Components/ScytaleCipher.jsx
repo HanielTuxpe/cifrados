@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import ErrorHandling from './ErrorHandling';
+import Tooltip from './Tooltip';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ScytaleCipher() {
     const [message, setMessage] = useState('');
     const [columns, setColumns] = useState(0);
     const [result, setResult] = useState('');
-    const [error, setError] = useState('');
+
+    const cifrado = "Cifrado Escítala"
+    const text = 'Ingresa el mensaje y el número de columnas. La aplicación reorganizará el mensaje en columnas para cifrar y descifrar. Cabe recalcar que el número de columnas debe ser menor al largo de caracteres del mensaje a encriptar'
 
     const handleEncrypt = () => {
         if (!message) {
-            setError('Por favor, ingrese un mensaje y el número correcto de columnas.');
+            toast.error('Por favor, ingrese un mensaje y el número correcto de columnas.');
             return;
         }
-        if (columns >= message.length ){
-            setError('Por favor, un número de columnas que sea menor al número de caracteres en su mensaje.');
+        if (columns >= message.length || columns === 0){
+            toast.error('Por favor, un número de columnas que sea menor al número de caracteres en su mensaje y diferente de 0.');
             return;
         }
-        setError('');
 
         let encrypted = '';
         const cleanMessage = message.replace(/\s+/g, '');
@@ -32,10 +35,10 @@ function ScytaleCipher() {
 
     const handleDecrypt = () => {
         if (!message || columns <= 0) {
-            setError('Por favor, ingrese un mensaje y/o el número correcto de columnas.');
+            toast.error('Por favor, ingrese un mensaje y/o el número correcto de columnas.');
             return;
         }
-        setError('');
+
 
         let decrypted = new Array(message.length).fill('');
         let position = 0;
@@ -46,6 +49,34 @@ function ScytaleCipher() {
             }
         }
         setResult(decrypted.join(''));
+    };
+
+    const handleCopy = () => {
+        if (result) {
+            navigator.clipboard.writeText(result)
+                .then(() => {
+                    toast.success('¡Copiado al portapapeles!', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                })
+                .catch((err) => {
+                    toast.error('Error al copiar, por favor inténtalo de nuevo.', {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                });
+        }
     };
 
     return (
@@ -93,10 +124,12 @@ function ScytaleCipher() {
                         Cifrado: "DEEONCT"
                     </li>
                 </ul>
+                <p>
+                    Para saber cómo funciona utilizar este cifrado, pulsa el <Tooltip title={cifrado} message={text}/>.
+                </p>
             </div>
             <div className='info-cipher'>
                 <h2>Try it Out!</h2>
-                <ErrorHandling error={error} /> 
                 <div className="grid-container">
                     <label>
                         Mensaje:
@@ -122,7 +155,13 @@ function ScytaleCipher() {
                     <button onClick={handleDecrypt}>Descifrar</button>
                 </div>
                 <p>Resultado: {result}</p>
+                {result && (
+                    <div>
+                        <button onClick={handleCopy}>Copiar al portapapeles</button>
+                    </div>
+                )}
             </div>
+            <ToastContainer />
         </div>
     );
 }

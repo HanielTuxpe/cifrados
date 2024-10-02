@@ -86,6 +86,7 @@ button:hover {
   padding: 8px; /* Añade un poco de espacio dentro de las celdas */
 }
 
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
