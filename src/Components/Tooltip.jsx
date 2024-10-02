@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Tooltip.css';
 
-const Tooltip = ({ title, message}) => {
+const Tooltip = ({ title, message }) => {
     const [showTooltip, setShowTooltip] = useState(false);
 
     const toggleTooltip = () => {
@@ -15,11 +15,15 @@ const Tooltip = ({ title, message}) => {
             </span>
             {showTooltip && (
                 <div className="tooltip-text">
-                    <p><strong>{title}:</strong> {message}</p>
+                    <p><strong>{title}:</strong></p>
+                    {message.split('\n').map((line, index) => (
+                        <p key={index}>{line}</p>
+                    ))}
                 </div>
             )}
         </span>
     );
 }
+
 
 export default Tooltip;
