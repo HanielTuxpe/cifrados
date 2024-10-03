@@ -104,7 +104,7 @@ function RSACipher() {
                     {privateKey && (
                         <div>
                             <input type='text' value={privateKey} />
-                            <button onClick={() => handleCopy(privateKey)}>Copiar clave pública</button>
+                            <button onClick={() => handleCopy(privateKey)}>Copiar clave privada</button>
                         </div>
                     )}
                 </div>
@@ -121,7 +121,7 @@ function RSACipher() {
                                 onChange={(e) => setMessage(e.target.value)}
                             />
                             <label>
-                                Ingresa la Clave:
+                                Ingresa la Clave Pública:
                             </label>
                             <input
                                 type="text"
@@ -145,7 +145,7 @@ function RSACipher() {
                                 rows={4}
                                 cols={50}
                                 style={{
-                                    width: '200px',
+                                    width: '300px',
                                     height: '100px',
                                     resize: 'none'
                                 }}
@@ -170,7 +170,7 @@ function RSACipher() {
                                 onChange={(e) => setMessageD(e.target.value)}
                             />
                             <label>
-                                Ingresa la Clave:
+                                Ingresa la Clave Privada:
                             </label>
                             <input
                                 type="text"

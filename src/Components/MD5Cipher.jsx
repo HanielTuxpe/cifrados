@@ -54,7 +54,7 @@ function MD5Cipher() {
                         <p>Ejemplo:</p>
                         <ul>
                             <li>Mensaje original: "HOLA"</li>
-                            <li>Cifrado: "c6f00988430dbc8e83a7bc7ab5256346"</li>
+                            <li>Cifrado: c6f00988430dbc8e83a7bc7ab5256346</li>
                         </ul>
                         <p>
                             Para saber cómo funciona utilizar este cifrado, pulsa el <Tooltip title={cifrado} message={text} />.

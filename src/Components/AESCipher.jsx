@@ -122,7 +122,20 @@ function AESCipher() {
                                 <button onClick={() => handleCopy(key)}>Copiar clave pública</button>
                             </div>
                         )}
-                        <p>Resultado: {result}</p>
+                        <p>Resultado:</p>
+                        {result && (
+                            <textarea
+                                value={result}
+                                readOnly
+                                rows={4}
+                                cols={50}
+                                style={{
+                                    width: '300px',
+                                    height: '50px',
+                                    resize: 'none'
+                                }}
+                            />
+                        )}
                         {result && (
                             <div>
                                 <button onClick={() => handleCopy(result)}>Copiar al portapapeles</button>
